@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Restaurante</title>
+    <link th:href="@{/css/home.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+    <div class="app-container">
+        <button id="sidebarToggle" class="sidebar-toggle" title="Mostrar/ocultar menú">
+            <i class="fas fa-bars"></i>
+        </button>
+        <!-- Barra lateral -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img th:src="@{/img/logoR.jpg}" alt="Logo" class="logo" />
+                <h3>Restaurante App</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-item">
+                    <i class="fas fa-table"></i>
+                    <a th:href="@{/mesas}">Gestión de Mesas</a>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-utensils"></i>
+                    <a th:href="@{/menu}">Gestión de Menú</a>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <a th:href="@{/empleados}">Gestión de Empleados</a>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <a th:href="@{/reportes}">Reportes</a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <a th:href="@{/ajustes}">Ajustes</a>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button type="submit" class="logout-btn">Cerrar Sesión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Contenido principal -->
+            <main class="main-content" id="mainContent" layout:fragment="content">
+                <!-- Aquí Thymeleaf inyectará el contenido de las vistas hijas -->
+        </main>
+
+    </div>
+    <script th:src="@{/js/sidebar.js}"></script>
+</body>
+</html>
