@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Restaurante</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+<!-- Fragmento navbar -->
+<div th:fragment="navbar">
+
+    <!-- Layout principal -->
+    <div class="layout">
+        
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            
+            <!-- Botón para achicar dentro del sidebar -->
+            <button id="toggleSidebar" class="toggle-btn-inside" title="Contraer barra">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="logo-box">
+                <img th:src="@{/img/logoR.jpg}" alt="Logo Restaurante" class="logo" />
+                <h2>Restaurante App</h2>
+
+                <div class="centro">
+                    <strong>Rol:</strong><br />
+                    <span th:text="${#authentication.principal.authorities}">********</span>
+                </div>
+
+                <div class="vigencia">
+                    <strong style="color:#d90429;">Sesión activa</strong>
+                    <span>✓</span>
+                </div>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <i class="fas fa-table"></i>
+                    <a th:href="@{/mesas}">Gestión de Mesas</a>
+                </li>
+                <li>
+                    <i class="fas fa-utensils"></i>
+                    <a th:href="@{/menu}">Gestión de Menú</a>
+                </li>
+                <li>
+                    <i class="fas fa-users"></i>
+                    <a th:href="@{/empleados}">Gestión de Empleados</a>
+                </li>
+                <li>
+                    <i class="fas fa-chart-bar"></i>
+                    <a th:href="@{/reportes}">Reportes</a>
+                </li>
+                <li>
+                    <i class="fas fa-cog"></i>
+                    <a th:href="@{/ajustes}">Ajustes</a>
+                </li>
+            </ul>
+
+            <hr />
+
+            <ul class="menu">
+                <li>
+                    <i class="fas fa-sign-out-alt"></i>
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button type="submit" class="logout-btn">Cerrar Sesión</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content" id="mainContent">
+            <div th:insert="~{::content}"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

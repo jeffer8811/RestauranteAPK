@@ -42,8 +42,10 @@ public class HomeController {
     
         return "redirect:/login?success";
     }
-
-    
+    @GetMapping("/empleados")
+    public String empleados() {
+        return "empleados"; 
+    }
     
     @GetMapping("/home")
     public String home() {

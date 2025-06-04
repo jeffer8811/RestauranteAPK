@@ -1,0 +1,114 @@
+    <title>Inicio</title>
+<link th:href="@{/css/nav.css}" rel="stylesheet" />
+<link th:href="@{/css/empleados.css}" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<body>
+<div th:replace="fragments/navbar :: navbar">
+  <div th:fragment="content">
+    <div class="container">
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <div class="header">
+        <h1>Gestión de Empleados</h1>
+        <div>
+          <input type="text" placeholder="Buscar empleado...">
+          <button class="btn" onclick="openModal()">+ Añadir Empleado</button>
+        </div>
+      </div>
+      
+      <!-- Tabla de empleados -->
+      <table class="employee-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Correo</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>001</td>
+            <td>María Gómez</td>
+            <td>Mozo</td>
+            <td>maria@restaurante.com</td>
+            <td class="status-active">Activo</td>
+            <td>
+              <button class="btn">Editar</button>
+              <button class="btn btn-danger">Desactivar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>002</td>
+            <td>Juan Pérez</td>
+            <td>Administrador</td>
+            <td>juan@restaurante.com</td>
+            <td class="status-active">Activo</td>
+            <td>
+              <button class="btn">Editar</button>
+              <button class="btn btn-danger">Desactivar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>003</td>
+            <td>Luis Torres</td>
+            <td>Cocina</td>
+            <td>luis@restaurante.com</td>
+            <td class="status-inactive">Inactivo</td>
+            <td>
+              <button class="btn">Editar</button>
+              <button class="btn">Reactivar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Modal para añadir empleado -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>Añadir Nuevo Empleado</h2>
+      <div class="form-group">
+        <label>Nombre completo</label>
+        <input type="text">
+      </div>
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email">
+      </div>
+      <div class="form-group">
+        <label>Teléfono</label>
+        <input type="tel">
+      </div>
+      <div class="form-group">
+        <label>Rol</label>
+        <select>
+          <option>Mozo</option>
+          <option>Cocinero</option>
+          <option>Administrador</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password">
+        <small>Dejar en blanco para generar automáticamente</small>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
+        <button class="btn">Guardar</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+<script th:src="@{/js/empleados.js}"></script>
+<script th:src="@{/js/nav.js}"></script>
+</body>
+</html>

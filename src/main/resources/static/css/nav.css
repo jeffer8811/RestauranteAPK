@@ -1,0 +1,192 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Botón dentro de la barra */
+.toggle-btn-inside {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: -15px;
+    background-color: #2b3e50;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: transform 0.3s;
+}
+
+.sidebar.collapsed .toggle-btn-inside i {
+    transform: rotate(180deg);
+}
+
+/* Ajustar posicionamiento del sidebar a relativo */
+.sidebar {
+    position: relative;
+}
+
+/* Sidebar colapsado */
+.sidebar.collapsed {
+    width: 70px;
+    padding: 1rem 0.5rem;
+    align-items: center;
+}
+
+.sidebar.collapsed .logo-box h2,
+.sidebar.collapsed .centro,
+.sidebar.collapsed .vigencia,
+.sidebar.collapsed .menu a span,
+.sidebar.collapsed .menu li i + a {
+    display: none;
+}
+
+.sidebar.collapsed .logo {
+    width: 50px;
+    height: 50px;
+}
+
+/* Ajuste de íconos al centro cuando está colapsado */
+.sidebar.collapsed .menu li {
+    text-align: center;
+}
+
+.sidebar.collapsed .menu li i {
+    font-size: 1.2rem;
+}
+
+/* Ajuste del contenido al colapsar */
+.sidebar + .main-content {
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed + .main-content {
+    margin-left: 70px;
+}
+
+/* Layout principal */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #1b1b2f;
+    color: #fff;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+}
+
+.logo-box {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    object-fit: cover;
+    border: 2px solid #f5cb5c;
+}
+
+.logo-box h2 {
+    font-size: 1.2rem;
+    color: #f5cb5c;
+    margin-bottom: 1rem;
+}
+
+.centro,
+.vigencia {
+    text-align: center;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.vigencia span {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+/* Menú lateral */
+.menu {
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem 0;
+}
+
+.menu li {
+    margin: 1rem 0;
+}
+
+.menu a,
+.logout-btn {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.menu a:hover,
+.logout-btn:hover {
+    color: #f5cb5c;
+    transform: translateX(5px);
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1rem;
+}
+
+/* Línea divisoria */
+hr {
+    border: 0;
+    height: 1px;
+    background: #444;
+    margin: 1.5rem 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .sidebar .logo-box,
+    .sidebar .menu {
+        display: none;
+    }
+
+    .topbar {
+        text-align: center;
+    }
+}
