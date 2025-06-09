@@ -1,33 +1,10 @@
-    <title>Inicio</title>
-<link th:href="@{/css/nav.css}" rel="stylesheet" />
-<link th:href="@{/css/empleados.css}" rel="stylesheet" />
+<section xmlns:th="http://www.thymeleaf.org"
+         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+         layout:decorate="~{base}"
+         layout:fragment="content">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-<body>
-<div th:replace="fragments/navbar :: navbar">
-  <div th:fragment="content">
-    <div class="container">
-    <!-- Contenido principal -->
-    <div class="main-content">
-      <div class="header">
-        <h1>Gestión de Empleados</h1>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ejemplo Sidebar Toggle</title>
+    <h1>Bienvenido admin</h1>
+    <p>Gestión de restaurante</p>
 
-</head>
-<body>
-
-
-
-
-<script th:src="@{/js/nav.js}"></script>
-
-</body>
-</html>
-
-      </div>
+</section>
       

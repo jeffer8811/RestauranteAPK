@@ -1,114 +1,136 @@
-    <title>Inicio</title>
-<link th:href="@{/css/nav.css}" rel="stylesheet" />
-<link th:href="@{/css/empleados.css}" rel="stylesheet" />
+<section xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{base}" layout:fragment="content">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-<body>
-<div th:replace="fragments/navbar :: navbar">
-  <div th:fragment="content">
-    <div class="container">
-    <!-- Contenido principal -->
+  <link rel="stylesheet" href="/empleados.css">
+
+  <div class="container">
     <div class="main-content">
       <div class="header">
         <h1>Gestión de Empleados</h1>
-        <div>
-          <input type="text" placeholder="Buscar empleado...">
-          <button class="btn" onclick="openModal()">+ Añadir Empleado</button>
-        </div>
+        <button class="btn" type="button" onclick="openModal()">+ Añadir Empleado</button>
       </div>
-      
+
       <!-- Tabla de empleados -->
       <table class="employee-table">
         <thead>
           <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Rol</th>
             <th>Correo</th>
+            <th>Rol</th>
             <th>Estado</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>001</td>
-            <td>María Gómez</td>
-            <td>Mozo</td>
-            <td>maria@restaurante.com</td>
-            <td class="status-active">Activo</td>
+          <tr th:each="empleado : ${empleados}">
+            <td th:text="${empleado.id}">1</td>
+            <td th:text="${empleado.nombre}">Nombre</td>
+            <td th:text="${empleado.correo}">correo@ejemplo.com</td>
+            <td th:text="${empleado.rol}">Rol</td>
+            <td th:text="${empleado.estado}"
+              th:classappend="${empleado.estado} == 'Activo' ? 'status-active' : 'status-inactive'">Activo</td>
+
+
             <td>
-              <button class="btn">Editar</button>
-              <button class="btn btn-danger">Desactivar</button>
-            </td>
-          </tr>
-          <tr>
-            <td>002</td>
-            <td>Juan Pérez</td>
-            <td>Administrador</td>
-            <td>juan@restaurante.com</td>
-            <td class="status-active">Activo</td>
-            <td>
-              <button class="btn">Editar</button>
-              <button class="btn btn-danger">Desactivar</button>
-            </td>
-          </tr>
-          <tr>
-            <td>003</td>
-            <td>Luis Torres</td>
-            <td>Cocina</td>
-            <td>luis@restaurante.com</td>
-            <td class="status-inactive">Inactivo</td>
-            <td>
-              <button class="btn">Editar</button>
-              <button class="btn">Reactivar</button>
+              <button class="btn btn-edit" type="button"
+                th:attr="onclick=|openEditModal(${empleado.id}, '${empleado.nombre}', '${empleado.correo}', '${empleado.rol}')|">
+                ✏️ Editar
+              </button>
+
+
+
+
             </td>
           </tr>
         </tbody>
       </table>
+
+      <!-- Modal para añadir -->
+      <div class="modal" id="modal" style="display:none;">
+        <div class="modal-content">
+          <h2>Añadir Nuevo Empleado</h2>
+          <form th:action="@{/empleados}" method="post" th:object="${nuevoEmpleado}">
+            <div class="form-group">
+              <label>Nombre completo</label>
+              <input type="text" th:field="*{nombre}" required>
+            </div>
+            <div class="form-group">
+              <label>Correo electrónico</label>
+              <input type="email" th:field="*{correo}" required>
+            </div>
+            <div class="form-group">
+              <label>Rol</label>
+              <select th:field="*{rol}">
+                <option value="Mozo">Mozo</option>
+                <option value="Cocinero">Cocinero</option>
+                <option value="Administrador">Administrador</option>
+              </select>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+              <button type="button" class="btn btn-danger" onclick="closeModal()">Cancelar</button>
+              <button type="submit" class="btn">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal para editar -->
+      <div class="modal" id="editModal" style="display:none;">
+        <div class="modal-content">
+          <h2>Editar Empleado</h2>
+          <form th:action="@{/empleados/actualizar}" method="post">
+            <input type="hidden" name="id" id="edit-id">
+
+            <div class="form-group">
+              <label>Nombre completo</label>
+              <input type="text" name="nombre" id="edit-nombre" required>
+            </div>
+
+            <div class="form-group">
+              <label>Correo electrónico</label>
+              <input type="email" name="correo" id="edit-correo" required>
+            </div>
+
+            <div class="form-group">
+              <label>Rol</label>
+              <select name="rol" id="edit-rol">
+                <option value="Mozo">Mozo</option>
+                <option value="Cocinero">Cocinero</option>
+                <option value="Administrador">Administrador</option>
+              </select>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+              <button type="button" class="btn btn-danger" onclick="closeEditModal()">Cancelar</button>
+              <button type="submit" class="btn">Actualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
     </div>
   </div>
-  
-  <!-- Modal para añadir empleado -->
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <h2>Añadir Nuevo Empleado</h2>
-      <div class="form-group">
-        <label>Nombre completo</label>
-        <input type="text">
-      </div>
-      <div class="form-group">
-        <label>Correo electrónico</label>
-        <input type="email">
-      </div>
-      <div class="form-group">
-        <label>Teléfono</label>
-        <input type="tel">
-      </div>
-      <div class="form-group">
-        <label>Rol</label>
-        <select>
-          <option>Mozo</option>
-          <option>Cocinero</option>
-          <option>Administrador</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Contraseña</label>
-        <input type="password">
-        <small>Dejar en blanco para generar automáticamente</small>
-      </div>
-      <div style="display: flex; justify-content: flex-end; gap: 10px;">
-        <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
-        <button class="btn">Guardar</button>
-      </div>
-    </div>
-  </div>
-  </div>
-</div>
+</section>
+<!-- Scripts -->
+<script>
+  function openModal() {
+    document.getElementById('modal').style.display = 'flex';
+  }
 
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
 
+  function openEditModal(id, nombre, correo, rol) {
+    document.getElementById('edit-id').value = id;
+    document.getElementById('edit-nombre').value = nombre;
+    document.getElementById('edit-correo').value = correo;
+    document.getElementById('edit-rol').value = rol;
+    document.getElementById('editModal').style.display = 'flex';
+  }
 
-<script th:src="@{/js/empleados.js}"></script>
-<script th:src="@{/js/nav.js}"></script>
-</body>
-</html>
+  function closeEditModal() {
+    document.getElementById('editModal').style.display = 'none';
+  }
+</script>

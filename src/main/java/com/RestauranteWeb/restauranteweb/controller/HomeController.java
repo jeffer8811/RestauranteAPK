@@ -2,6 +2,7 @@ package com.RestauranteWeb.restauranteweb.controller;
 
 import com.RestauranteWeb.restauranteweb.model.User;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,14 +43,16 @@ public class HomeController {
     
         return "redirect:/login?success";
     }
-    @GetMapping("/empleados")
-    public String empleados() {
-        return "empleados"; 
-    }
+@GetMapping("/empleadosHome")
+public String empleados() {
+    return "empleados"; 
+}
+
     
     @GetMapping("/home")
     public String home() {
         return "home";
     }
-    
+
+
 }
