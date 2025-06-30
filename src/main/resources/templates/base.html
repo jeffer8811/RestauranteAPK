@@ -21,6 +21,10 @@
             </div>
             <nav class="sidebar-nav">
                 <div class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <a th:href="@{/home}">Inicio</a>
+                </div>
+                <div class="nav-item">
                     <i class="fas fa-table"></i>
                     <a th:href="@{/mesas}">Gestión de Mesas</a>
                 </div>
@@ -33,11 +37,23 @@
                     <a th:href="@{/empleados}">Gestión de Empleados</a>
                 </div>
                 <div class="nav-item">
+                    <i class="fas fa-barcode"></i>
+                    <a th:href="@{/inventaro}">Inventario</a>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-tags"></i>
+                    <a th:href="@{/promociones}">Promociones</a>
+                </div>  
+                <div class="nav-item">
                     <i class="fas fa-chart-bar"></i>
                     <a th:href="@{/reportes}">Reportes</a>
                 </div>
             </nav>
             <div class="sidebar-footer">
+                <div class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <a th:href="@{/perfil}">Perfil</a>
+                </div>
                 <div class="nav-item">
                     <i class="fas fa-cog"></i>
                     <a th:href="@{/ajustes}">Ajustes</a>
