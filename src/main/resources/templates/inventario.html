@@ -1,0 +1,116 @@
+<section xmlns:th="http://www.thymeleaf.org"
+         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+         layout:decorate="~{base}"
+         layout:fragment="content">
+
+  <link rel="stylesheet" href="/empleados.css">
+
+  <div class="container">
+    <div class="main-content">
+      <div class="header">
+        <h1>Gestión de Inventario</h1>
+        <button class="btn" type="button" onclick="openModal()">+ Añadir Producto</button>
+      </div>
+
+      <!-- Tabla de productos -->
+      <table class="employee-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Categoría</th>
+            <th>Nombre</th>
+            <th>Unidad</th>
+            <th>Stock Actual</th>
+            <th>Stock Mínimo</th>
+            <th>Precio Unitario</th>
+            <th>Fecha Última Entrada</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="producto : ${productos}">
+            <td th:text="${producto.id}">1</td>
+            <td th:text="${producto.categoria}">Bebidas</td>
+            <td th:text="${producto.nombre}">Agua</td>
+            <td th:text="${producto.unidad}">Litros</td>
+            <td th:text="${producto.stockActual}">20</td>
+            <td th:text="${producto.stockMinimo}">5</td>
+            <td th:text="${producto.precioUnitario}">2.50</td>
+            <td th:text="${producto.fechaUltimaEntrada}">2025-07-01</td>
+            <td>
+              <button class="btn btn-edit" type="button"
+                th:attr="onclick=|openEditModal(${producto.id}, '${producto.categoria}', '${producto.nombre}', '${producto.unidad}', ${producto.stockActual}, ${producto.stockMinimo}, ${producto.precioUnitario}, '${producto.fechaUltimaEntrada}')|">
+                ✏️ Editar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Modal para añadir -->
+      <div class="modal" id="modal" style="display:none;">
+        <div class="modal-content">
+          <h2>Añadir Producto</h2>
+          <form th:action="@{/producto/guardar}" method="post" th:object="${producto}">
+            <div class="form-group"><label>Categoría</label><input type="text" th:field="*{categoria}" required></div>
+            <div class="form-group"><label>Nombre</label><input type="text" th:field="*{nombre}" required></div>
+            <div class="form-group"><label>Unidad</label><input type="text" th:field="*{unidad}" required></div>
+            <div class="form-group"><label>Stock Actual</label><input type="number" th:field="*{stockActual}" required></div>
+            <div class="form-group"><label>Stock Mínimo</label><input type="number" th:field="*{stockMinimo}" required></div>
+            <div class="form-group"><label>Precio Unitario</label><input type="number" step="0.01" th:field="*{precioUnitario}" required></div>
+            <div class="form-group"><label>Fecha Última Entrada</label><input type="date" th:field="*{fechaUltimaEntrada}" required></div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+              <button type="button" class="btn btn-danger" onclick="closeModal()">Cancelar</button>
+              <button type="submit" class="btn">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal para editar -->
+      <div class="modal" id="editModal" style="display:none;">
+        <div class="modal-content">
+          <h2>Editar Producto</h2>
+          <form th:action="@{/producto/guardar}" method="post">
+            <input type="hidden" name="id" id="edit-id">
+            <div class="form-group"><label>Categoría</label><input type="text" name="categoria" id="edit-categoria" required></div>
+            <div class="form-group"><label>Nombre</label><input type="text" name="nombre" id="edit-nombre" required></div>
+            <div class="form-group"><label>Unidad</label><input type="text" name="unidad" id="edit-unidad" required></div>
+            <div class="form-group"><label>Stock Actual</label><input type="number" name="stockActual" id="edit-stockActual" required></div>
+            <div class="form-group"><label>Stock Mínimo</label><input type="number" name="stockMinimo" id="edit-stockMinimo" required></div>
+            <div class="form-group"><label>Precio Unitario</label><input type="number" step="0.01" name="precioUnitario" id="edit-precioUnitario" required></div>
+            <div class="form-group"><label>Fecha Última Entrada</label><input type="date" name="fechaUltimaEntrada" id="edit-fechaUltimaEntrada" required></div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+              <button type="button" class="btn btn-danger" onclick="closeEditModal()">Cancelar</button>
+              <button type="submit" class="btn">Actualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function openModal() {
+    document.getElementById('modal').style.display = 'flex';
+  }
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
+  function openEditModal(id, categoria, nombre, unidad, stockActual, stockMinimo, precioUnitario, fechaUltimaEntrada) {
+    document.getElementById('edit-id').value = id;
+    document.getElementById('edit-categoria').value = categoria;
+    document.getElementById('edit-nombre').value = nombre;
+    document.getElementById('edit-unidad').value = unidad;
+    document.getElementById('edit-stockActual').value = stockActual;
+    document.getElementById('edit-stockMinimo').value = stockMinimo;
+    document.getElementById('edit-precioUnitario').value = precioUnitario;
+    document.getElementById('edit-fechaUltimaEntrada').value = fechaUltimaEntrada;
+    document.getElementById('editModal').style.display = 'flex';
+  }
+  function closeEditModal() {
+    document.getElementById('editModal').style.display = 'none';
+  }
+</script>
