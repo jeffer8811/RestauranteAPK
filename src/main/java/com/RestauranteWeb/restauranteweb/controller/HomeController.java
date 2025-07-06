@@ -36,18 +36,23 @@ public class HomeController {
         return "register";
     }
     
-    @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user) {
-    
-        System.out.println("Registrando usuario: " + user.getUsername() + " - " + user.getPassword());
-    
-     User savedUser = userService.save(user);
-    
-    
-        System.out.println("Usuario guardado: " + savedUser.getUsername() + " - " + savedUser.getPassword());
-    
-        return "redirect:/login?success";
+@PostMapping("/register")
+public String registerUser(@ModelAttribute User user) {
+    System.out.println("Registrando usuario: " + user.getUsername());
+
+    // Verificar si el usuario ya existe usando Optional
+    if (userService.findByUsername(user.getUsername()).isPresent()) {
+        System.out.println("Error: El nombre de usuario ya está en uso.");
+        return "redirect:/register?error"; // Redirige con mensaje de error
     }
+
+    User savedUser = userService.save(user);
+    System.out.println("Usuario guardado: " + savedUser.getUsername());
+
+    return "redirect:/login?success";
+}
+
+
 @GetMapping("/empleadosHome")
 public String empleados() {
     return "empleados"; 

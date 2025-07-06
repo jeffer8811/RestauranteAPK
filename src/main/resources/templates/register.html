@@ -9,6 +9,9 @@
 <body>
     <div class="auth-container">
         <h2>Registro</h2>
+        <div class="error-message" th:if="${param.error}">
+            <p style="color: red;">El nombre de usuario ya está en uso. Intenta con otro.</p>
+        </div>
         <form th:action="@{/register}" th:object="${user}" method="post">
             <div class="form-group">
                 <label for="username">Usuario:</label>
