@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -26,7 +27,7 @@ public class PromocionController {
     @GetMapping("/promociones/nueva")
     public String mostrarFormulario(Model model) {
         model.addAttribute("promocion", new Promocion());
-        return "crear-promocion"; // Llama a crear-promocion.html
+        return "crear-promocion"; // 
     }
     
     // Procesa el formulario y guarda la nueva promoción
@@ -35,6 +36,16 @@ public class PromocionController {
         // Por defecto la ponemos activa al crearla
         promocion.setActivo(true);
         promocionRepository.save(promocion);
-        return "redirect:/promociones"; // Redirige a la lista de promociones
+        return "redirect:/promociones"; // 
     }
+
+    // Muestra el formulario para editar una promoción existente
+    @GetMapping("/promociones/editar/{id}")
+     public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+    Promocion promocion = promocionRepository.findById(id)
+        .orElseThrow(() -> new IllegalArgumentException("ID de Promoción inválido:" + id));
+    
+    model.addAttribute("promocion", promocion);
+    return "crear-promocion";
+}
 }

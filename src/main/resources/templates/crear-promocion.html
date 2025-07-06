@@ -8,11 +8,12 @@
     </head>
     <div class="promo-container">
          <header class="form-header">
-            <h2>CREAR NUEVA PROMOCIÓN</h2>
+            <h2 th:text="${promocion.id != null} ? 'EDITAR PROMOCIÓN' : 'CREAR NUEVA PROMOCIÓN'">CREAR NUEVA PROMOCIÓN</h2>
             <p>Información Básica</p>
         </header>
 
         <form class="promotion-form" th:action="@{/promociones/guardar}" th:object="${promocion}" method="post">
+         <input type="hidden" th:field="*{id}" />
             <div class="form-row">
                 <div class="form-group large">
                     <label for="promo-name">Nombre de la Promoción *</label>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
+<head>
+    <title>Gestión de Perfiles</title>
+    <link th:href="@{/css/perfiles-gestion.css}" rel="stylesheet" />
+</head>
+<section layout:fragment="content">
+    <div class="profiles-container">
+        <div class="header">
+            <h1>GESTION De EMPLEADOS:</h1>
+            <div class="header-actions">
+                <input type="text" placeholder="Buscar empleado..." class="search-bar">
+                <a th:href="@{/perfiles/nuevo}" class="btn-add">+ Añadir Perfil</a>
+            </div>
+        </div>
+        <table class="profiles-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NOMBRE</th>
+                    <th>ROL</th>
+                    <th>CORREO</th>
+                    <th>ESTADO</th>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="perfil : ${perfiles}">
+                    <td th:text="${#numbers.formatInteger(perfil.id, 3)}">001</td>
+                    <td th:text="${perfil.nombreCompleto}">Maria Gomez</td>
+                    <td th:text="${perfil.rol}">Mozo</td>
+                    <td th:text="${perfil.correo}">maria@restaurante.com</td>
+                    <td>
+                        <span th:text="${perfil.estado}" th:classappend="${perfil.estado == 'Activo'} ? 'status-active' : 'status-inactive'">Activo</span>
+                    </td>
+                    <td class="actions">
+                        <a th:href="@{/perfiles/editar/{id}(id=${perfil.id})}" class="btn-action btn-edit">Editar</a>
+                        <form th:action="@{/perfiles/desactivar/{id}(id=${perfil.id})}" method="post" style="display:inline;">
+                            <button type="submit" class="btn-action btn-deactivate">Desactivar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</html>

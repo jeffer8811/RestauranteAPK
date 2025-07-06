@@ -31,7 +31,9 @@
                     <p th:text="${promo.descripcion}">Descripción de la promo...</p>
                 </div>
                 <div class="card-footer">
-                    <button class="btn-edit"><i class="fas fa-pencil-alt"></i> Editar</button>
+                    <a th:href="@{/promociones/editar/{id}(id=${promo.id})}" class="btn-edit">
+                       <i class="fas fa-pencil-alt"></i> Editar 
+                    </a>
                     <button class="btn-delete"><i class="fas fa-trash-alt"></i></button>
                 </div>
             </div>
