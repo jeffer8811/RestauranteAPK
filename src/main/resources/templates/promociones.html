@@ -1,0 +1,40 @@
+<section xmlns:th="http://www.thymeleaf.org" 
+         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+         layout:decorate="~{base}" 
+         layout:fragment="content">
+
+    <head>
+        <title>Gestión de Promociones</title>
+        <link th:href="@{/css/promociones.css}" rel="stylesheet" />
+    </head>
+
+    <div class="promo-container">
+        <header class="main-header">
+            <div class="title-container">
+                <h1>GESTION DE PROMOCIONES</h1>
+            </div>
+            <a th:href="@{/promociones/nueva}" class="btn-new-promotion">
+                <i class="fas fa-plus"></i> Nueva Promoción
+            </a>
+        </header>
+
+        <section class="promotions-grid">
+            <div class="promotion-card" th:each="promo : ${promociones}">
+                <div class="card-header">
+                    <h3 th:text="${promo.nombre}">Descuento Fin de Semana</h3>
+                    <div class="status" th:if="${promo.activo}">
+                        <span class.active>Activo</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <span class="tag" th:text="${promo.tipo}">Porcentual</span>
+                    <p th:text="${promo.descripcion}">Descripción de la promo...</p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn-edit"><i class="fas fa-pencil-alt"></i> Editar</button>
+                    <button class="btn-delete"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

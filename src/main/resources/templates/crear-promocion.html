@@ -1,0 +1,63 @@
+<section xmlns:th="http://www.thymeleaf.org" 
+         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+         layout:decorate="~{base}" 
+         layout:fragment="content">
+    <head>
+        <title>Crear Promoción</title>
+        <link th:href="@{/css/promociones.css}" rel="stylesheet" />
+    </head>
+    <div class="promo-container">
+         <header class="form-header">
+            <h2>CREAR NUEVA PROMOCIÓN</h2>
+            <p>Información Básica</p>
+        </header>
+
+        <form class="promotion-form" th:action="@{/promociones/guardar}" th:object="${promocion}" method="post">
+            <div class="form-row">
+                <div class="form-group large">
+                    <label for="promo-name">Nombre de la Promoción *</label>
+                    <input type="text" id="promo-name" th:field="*{nombre}" required>
+                </div>
+                <div class="form-group medium">
+                    <label for="promo-type">Tipo de Promoción *</label>
+                    <input type="text" id="promo-type" th:field="*{tipo}" placeholder="Ej: Porcentual, Combo, 2x1">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descripción</label>
+                <textarea id="description" rows="3" th:field="*{descripcion}"></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group small">
+                    <label for="discount">Porcentaje de Descuento (%)</label>
+                    <input type="number" id="discount" th:field="*{porcentajeDescuento}" placeholder="Ej: 15">
+                </div>
+                <div class="form-group small">
+                    <label for="min-purchase">Compra Mínima ($)</label>
+                    <input type="number" step="0.01" id="min-purchase" th:field="*{compraMinima}" placeholder="Ej: 50.00">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Período de Validez</label>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="start-date">Fecha de Inicio *</label>
+                        <input type="date" id="start-date" th:field="*{fechaInicio}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="end-date">Fecha de Fin *</label>
+                        <input type="date" id="end-date" th:field="*{fechaFin}" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-create">Crear Promoción</button>
+                <a th:href="@{/promociones}" class="btn btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
