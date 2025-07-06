@@ -3,8 +3,63 @@
          layout:decorate="~{base}"
          layout:fragment="content">
 
-    <h1>Bienvenido admin</h1>
-    <p>Gestión de restaurante</p>
+    <head layout:fragment="head">
+        <link th:href="@{/css/hom.css}" rel="stylesheet" />
+    </head>
+
+    <div class="dashboard-container">
+        <!-- Panel de Bienvenida -->
+        <div class="welcome-panel">
+            <div class="welcome-header">
+                <h1><i class="fas fa-user-tie"></i> Bienvenido, 
+                    <span th:text="${#strings.capitalize(#authentication.principal.username)}">Admin</span>
+                </h1>
+                <div class="current-time">
+                    <span id="currentDate"></span>
+                    <span id="currentTime"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estadísticas Rápidas -->
+        <div class="stats-container">
+            <!-- Tarjeta de Mesas -->
+            <div class="stat-card">
+                <div class="stat-icon bg-blue">
+                    <i class="fas fa-table"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Mesas Totales</h3>
+                    <p class="stat-value" th:text="${totalTables}">12</p>
+                    <p class="stat-subtext" th:text="${occupiedTables} + ' ocupadas'">5 ocupadas</p>
+                </div>
+            </div>
+
+            <!-- Tarjeta de Platillos -->
+            <div class="stat-card">
+                <div class="stat-icon bg-green">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Platillos en Menú</h3>
+                    <p class="stat-value" th:text="${totalMenuItems}">45</p>
+                    <p class="stat-subtext" th:text="${availableMenuItems} + ' disponibles'">42 disponibles</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico de Ventas -->
+        <div class="chart-container">
+            <h2><i class="fas fa-chart-line"></i> Ventas Recientes</h2>
+            <canvas id="salesChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Scripts necesarios -->
+    <div layout:fragment="page-scripts">
+        <!-- Chart.js para el gráfico -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script th:src="@{/js/hom.js}"></script>
+    </div>
 
 </section>
-      

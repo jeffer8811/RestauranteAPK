@@ -1,5 +1,6 @@
 package com.RestauranteWeb.restauranteweb.controller;
 
+import com.RestauranteWeb.restauranteweb.model.MenuItem;
 import com.RestauranteWeb.restauranteweb.model.User;
 import org.springframework.stereotype.Controller;
 
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.RestauranteWeb.restauranteweb.service.MenuItemService;
 import com.RestauranteWeb.restauranteweb.service.UserService;
 
 
@@ -16,8 +18,11 @@ public class HomeController {
 
         private final UserService userService;
     
-    public HomeController(UserService userService) {
+      private final MenuItemService menuItemService; 
+
+    public HomeController(UserService userService, MenuItemService menuItemService) {
         this.userService = userService;
+        this.menuItemService = menuItemService;
     }
     
     @GetMapping("/login")
@@ -33,12 +38,12 @@ public class HomeController {
     
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user) {
-    // Verifica en consola antes de guardar
+    
         System.out.println("Registrando usuario: " + user.getUsername() + " - " + user.getPassword());
     
      User savedUser = userService.save(user);
     
-    // Verifica después de guardar
+    
         System.out.println("Usuario guardado: " + savedUser.getUsername() + " - " + savedUser.getPassword());
     
         return "redirect:/login?success";
@@ -49,10 +54,19 @@ public String empleados() {
 }
 
     
-    @GetMapping("/home")
-    public String home() {
-        return "home";
-    }
+     @GetMapping("/home")
+    public String home(Model model) {
+    long totalPlatos = menuItemService.obtenerTodosLosItems().size(); 
+    long disponibles = menuItemService.obtenerTodosLosItems()
+                                      .stream()
+                                      .filter(MenuItem::isDisponible)
+                                      .count(); 
+
+    model.addAttribute("totalMenuItems", totalPlatos);
+    model.addAttribute("availableMenuItems", disponibles);
+
+    return "home";
+}
 
 
 }
