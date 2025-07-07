@@ -1,0 +1,99 @@
+.profiles-container {
+    padding: 20px 30px;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.header-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.search-bar {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+    width: 250px;
+}
+
+.btn-add {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none; /* Añadido para los enlaces <a> */
+}
+
+.profiles-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.profiles-table thead {
+    background-color: #f2f2f2;
+}
+
+.profiles-table th, .profiles-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.profiles-table th {
+    font-size: 14px;
+    color: #555;
+    text-transform: uppercase;
+}
+
+.status-active {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-inactive {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-action {
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none; /* Añadido para los enlaces <a> */
+    display: inline-block; /* Para que el padding funcione bien en enlaces */
+}
+
+.btn-edit {
+    background-color: #4a90e2; /* Azul */
+}
+
+.btn-deactivate {
+    background-color: #dc3545; /* Rojo */
+}

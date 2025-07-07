@@ -28,18 +28,35 @@
     </table>
 
     <!-- Modal de cobro -->
-    <div class="modal-cobro" id="modalCobro">
-      <div class="modal-contenido">
-        <span class="cerrar" onclick="cerrarModalCobro()">&times;</span>
-        <h2>Realizar Cobro</h2>
-        <p><strong>Mesa:</strong> <span id="mesaNumero">#</span></p>
-        <p><strong>Total a cobrar:</strong> S/ <span id="montoTotal">0.00</span></p>
-        <form th:action="@{/cobros/realizar}" method="post">
-          <input type="hidden" name="mesaId" id="mesaId" />
-          <button type="submit" class="btn">Confirmar Cobro</button>
-        </form>
-      </div>
-    </div>
+<div class="modal-cobro" id="modalCobro">
+  <div class="modal-contenido">
+    <span class="cerrar" onclick="cerrarModalCobro()">&times;</span>
+    <h2>Realizar Cobro</h2>
+    <p><strong>Mesa:</strong> <span id="mesaNumero">#</span></p>
+    <p><strong>Total a cobrar:</strong> S/ <span id="montoTotal">0.00</span></p>
+
+    <form th:action="@{/cobros/realizar}" method="post">
+      <input type="hidden" name="mesaId" id="mesaId" />
+      <button type="submit" class="btn">Confirmar Cobro</button>
+    </form>
+
+    <!-- Botón Yape -->
+    <button class="btn btn-yape" onclick="alert('Cobro con Yape seleccionado')">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl5oSqAtYtKqKNJcNb4BdbKO-DvE8Nsojlvw&s" 
+           alt="Yape" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
+      Pagar con Yape
+    </button>
+
+    <!-- Botón VISA -->
+    <button class="btn btn-visa" onclick="alert('Cobro con VISA seleccionado')">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg4fzD_2wlaVx71EqR_AtxYfDH4gPk61xvBg&s" 
+           alt="Visa" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
+      Pagar con VISA
+    </button>
+
+  </div>
+</div>
+
 
     <!-- Script para abrir/cerrar y llenar el modal -->
     <script>

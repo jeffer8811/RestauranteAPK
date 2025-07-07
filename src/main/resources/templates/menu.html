@@ -47,7 +47,7 @@
                         <td th:text="${item.nombre}">Nombre del platillo</td>
                         <td th:text="${item.descripcion}">Descripción del platillo</td>
                         <td th:text="${item.categoria}">Categoría</td>
-                        <td th:text="'$' + ${#numbers.formatDecimal(item.precio, 1, 2)}">0.00</td>
+                        <td th:text="'S/' + ${#numbers.formatDecimal(item.precio, 1, 2)}">0.00</td>
                         <td>
                             <label class="switch">
                                 <input type="checkbox" th:checked="${item.disponible}">
