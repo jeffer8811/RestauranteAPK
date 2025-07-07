@@ -1,0 +1,21 @@
+<div layout:decorate="~{base}">
+    <div layout:fragment="content">
+        <div class="form-container">
+            <h2 th:text="${mesa.id} != null ? 'Editar Mesa' : 'Agregar Mesa'"></h2>
+            <form th:action="@{${mesa.id} != null ? '/mesas/actualizar/' + ${mesa.id} : '/mesas'}" method="post">
+                <label for="numero">Número de mesa:</label>
+                <input type="number" id="numero" name="numero" th:value="${mesa.numero}" required>
+                <label for="capacidad">Capacidad:</label>
+                <input type="number" id="capacidad" name="capacidad" th:value="${mesa.capacidad}" required>
+                <label for="estado">Estado:</label>
+                <select id="estado" name="estado">
+                    <option value="Disponible" th:selected="${mesa.estado} == 'Disponible'">Disponible</option>
+                    <option value="Ocupado" th:selected="${mesa.estado} == 'Ocupado'">Ocupado</option>
+                </select>
+                <button type="submit" class="btn-guardar" th:text="${mesa.id} != null ? 'Actualizar' : 'Agregar'"></button>
+                <a href="/mesas" class="btn-cancelar">Cancelar</a>
+            </form>
+        </div>
+        <link rel="stylesheet" href="/css/mesas.css">
+    </div>
+</div> 

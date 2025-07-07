@@ -1,0 +1,14 @@
+<form th:action="@{/ventas/guardar}" method="post">
+    <label>Fecha:</label>
+    <input type="date" name="fecha" required>
+
+    <label>Item del menú:</label>
+    <select name="menuItemId" required>
+        <option th:each="item : ${menuItems}" th:value="${item.id}" th:text="${item.nombre}"></option>
+    </select>
+
+    <label>Cantidad:</label>
+    <input type="number" name="cantidad" min="1" required>
+
+    <button type="submit">Registrar venta</button>
+</form>

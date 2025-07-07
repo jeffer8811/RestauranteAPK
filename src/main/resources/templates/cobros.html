@@ -1,0 +1,58 @@
+<section layout:decorate="~{base}" layout:fragment="content" xmlns:th="http://www.thymeleaf.org">
+  <link rel="stylesheet" href="/css/cobros.css">
+
+  <div class="container">
+    <h1>Gestión de Cobros</h1>
+
+    <!-- Tabla de mesas -->
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Mesa</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="mesa : ${mesas}">
+          <td th:text="${mesa.numero}">Mesa</td>
+          <td th:text="${mesa.estado}">Estado</td>
+          <td>
+            <button class="btn"
+              th:onclick="|mostrarModalCobro(${mesa.id}, '${mesa.numero}', ${totales[mesa.id]})|">
+              💰 Ver Total
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Modal de cobro -->
+    <div class="modal-cobro" id="modalCobro">
+      <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarModalCobro()">&times;</span>
+        <h2>Realizar Cobro</h2>
+        <p><strong>Mesa:</strong> <span id="mesaNumero">#</span></p>
+        <p><strong>Total a cobrar:</strong> S/ <span id="montoTotal">0.00</span></p>
+        <form th:action="@{/cobros/realizar}" method="post">
+          <input type="hidden" name="mesaId" id="mesaId" />
+          <button type="submit" class="btn">Confirmar Cobro</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Script para abrir/cerrar y llenar el modal -->
+    <script>
+      function mostrarModalCobro(id, numero, total) {
+        document.getElementById('mesaId').value = id;
+        document.getElementById('mesaNumero').innerText = '#' + numero;
+        document.getElementById('montoTotal').innerText = parseFloat(total).toFixed(2);
+        document.getElementById('modalCobro').style.display = 'block';
+      }
+
+      function cerrarModalCobro() {
+        document.getElementById('modalCobro').style.display = 'none';
+      }
+    </script>
+  </div>
+</section>

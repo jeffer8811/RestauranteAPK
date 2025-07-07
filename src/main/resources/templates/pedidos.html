@@ -1,0 +1,81 @@
+<section xmlns:th="http://www.thymeleaf.org"
+         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+         layout:decorate="~{base}"
+         layout:fragment="content">
+
+  <link rel="stylesheet" href="/css/pedidos.css">
+
+  <div class="container">
+    <div class="main-content">
+      <div class="header">
+        <h1>Gestión de Pedidos</h1>
+        <button class="btn" type="button" onclick="openModal()">➕ Añadir Pedido</button>
+      </div>
+
+      <!-- Tabla de pedidos -->
+      <table class="employee-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Mesa</th>
+            <th>Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="pedido : ${pedidos}">
+            <td th:text="${pedido.id}"></td>
+            <td th:text="${#temporals.format(pedido.fecha, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="'Mesa ' + ${pedido.mesa.numero}"></td>
+            <td th:text="${pedido.estado}"></td>
+            <td>
+              <form th:action="@{/pedidos/actualizarEstado}" method="post" style="display: flex; gap: 8px;">
+                <input type="hidden" name="id" th:value="${pedido.id}">
+                <select name="estado">
+                  <option th:each="estado : ${estados}" 
+                          th:value="${estado}" 
+                          th:text="${estado}" 
+                          th:selected="${estado == pedido.estado}"></option>
+                </select>
+                <button class="btn btn-warning" type="submit">Actualizar</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Modal para registrar nuevo pedido -->
+      <div class="modal" id="modal" style="display:none;">
+        <div class="modal-content">
+          <h2>Nuevo Pedido</h2>
+          <form th:action="@{/pedidos/registrar}" method="post" th:object="${pedido}">
+            <div class="form-group">
+              <label for="mesa">Mesa</label>
+              <select th:field="*{mesa.id}" required>
+                <option value="">-- Seleccionar Mesa --</option>
+                <option th:each="mesa : ${mesas}" 
+                        th:value="${mesa.id}"
+                        th:text="'Mesa ' + ${mesa.numero} + ' - ' + ${mesa.estado}"></option>
+              </select>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+              <button type="button" class="btn btn-danger" onclick="closeModal()">Cancelar</button>
+              <button type="submit" class="btn">Registrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function openModal() {
+    document.getElementById('modal').style.display = 'flex';
+  }
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
+</script>

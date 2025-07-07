@@ -1,0 +1,58 @@
+<section xmlns:th="http://www.thymeleaf.org"
+         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+         layout:decorate="~{base}"
+         layout:fragment="content">
+
+    <head layout:fragment="head">
+        <link th:href="@{/css/ventas.css}" rel="stylesheet"/>
+    </head>
+
+    <div class="ventas-container">
+        <h1><i class="fas fa-cash-register"></i> Gestión de Ventas</h1>
+
+        <!-- Formulario para registrar nueva venta -->
+        <form th:action="@{/ventas/guardar}" method="post" class="formulario-venta">
+            <div class="form-group">
+                <label>Fecha:</label>
+                <input type="date" name="fecha" required/>
+            </div>
+
+            <div class="form-group">
+                <label>Item del menú:</label>
+                <select name="menuItemId" required>
+                    <option th:each="item : ${menuItems}" th:value="${item.id}" th:text="${item.nombre}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Cantidad:</label>
+                <input type="number" name="cantidad" min="1" required/>
+            </div>
+
+            <button type="submit" class="btn-registrar">Registrar Venta</button>
+        </form>
+
+        <!-- Tabla de ventas registradas -->
+        <div class="tabla-ventas">
+            <h2>📋 Ventas Registradas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Item</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="venta : ${ventas}">
+                        <td th:text="${venta.fecha}"></td>
+                        <td th:text="${venta.items[0]?.menuItem?.nombre}"></td>
+                        <td th:text="${venta.items[0]?.cantidad}"></td>
+                        <td th:text="${venta.total}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

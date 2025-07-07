@@ -1,12 +1,11 @@
 package com.RestauranteWeb.restauranteweb.service;
 
+import com.RestauranteWeb.restauranteweb.model.MenuItem;
+import com.RestauranteWeb.restauranteweb.repository.MenuItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.RestauranteWeb.restauranteweb.model.MenuItem;
-import com.RestauranteWeb.restauranteweb.repository.MenuItemRepository;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -58,7 +57,7 @@ public class MenuItemServiceImpl implements MenuItemService {
     public MenuItem guardarItem(MenuItem item, MultipartFile imagen) {
         if (imagen != null && !imagen.isEmpty()) {
             String nombreImagen = guardarImagen(imagen);
-            item.setImagen("img/menu/" + nombreImagen); // Esto guarda la ruta relativa correcta
+            item.setImagen("img/menu/" + nombreImagen);
         }
         return menuItemRepository.save(item);
     }
@@ -129,7 +128,6 @@ public class MenuItemServiceImpl implements MenuItemService {
 
     private void eliminarImagen(String rutaImagen) {
         try {
-            // Asegurarse de quitar el prefijo "img/menu/" para obtener solo el nombre del archivo
             String nombreArchivo = Paths.get(rutaImagen).getFileName().toString();
             Path archivo = rootLocation.resolve(nombreArchivo);
             Files.deleteIfExists(archivo);

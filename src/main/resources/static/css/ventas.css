@@ -1,0 +1,87 @@
+.ventas-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.ventas-container h1, .ventas-container h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 25px;
+}
+
+.formulario-venta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 10px;
+    background-color: #f4f6f9;
+    border-radius: 10px;
+}
+
+.formulario-venta .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario-venta label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.formulario-venta input,
+.formulario-venta select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.btn-registrar {
+    grid-column: span 2;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: auto;
+    transition: background-color 0.3s;
+}
+
+.btn-registrar:hover {
+    background-color: #4CAF50;
+}
+
+.tabla-ventas {
+    margin-top: 20px;
+}
+
+.tabla-ventas table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.tabla-ventas th,
+.tabla-ventas td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.tabla-ventas th {
+    background-color: #3498db;
+    color: white;
+}
+
+.tabla-ventas tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

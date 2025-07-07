@@ -1,0 +1,112 @@
+<section xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{base}" layout:fragment="content">
+
+    <head layout:fragment="head">
+        <link th:href="@{/css/reportes.css}" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+
+    <div class="reportes-container">
+        <h1><i class="fas fa-chart-line"></i> Análisis y Reportes</h1>
+
+        <!-- Formulario de fechas -->
+        <form th:action="@{/reportes}" method="post" class="reporte-form">
+            <div class="form-group">
+                <label for="desde">Desde:</label>
+                <input type="date" id="desde" name="desde" th:value="${desde}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hasta">Hasta:</label>
+                <input type="date" id="hasta" name="hasta" th:value="${hasta}" required>
+            </div>
+
+            <button type="submit" class="btn-generar">Generar Reporte</button>
+        </form>
+
+        <!-- Resultados del resumen -->
+        <div class="reporte-resultado" th:if="${resumen}">
+            <h3>📆 Reporte del <span th:text="${desde}"></span> al <span th:text="${hasta}"></span></h3>
+            <p><strong>Total de ventas:</strong> S/ <span th:text="${resumen.totalVentas}"></span></p>
+            <p><strong>Cantidad de ventas:</strong> <span th:text="${resumen.cantidadVentas}"></span></p>
+        </div>
+
+        <!-- Gráfico de ventas por día -->
+        <div th:if="${ventasPorFecha}" class="grafico-ventas">
+            <h3>📊 Ventas por Día</h3>
+            <canvas id="ventasChart"></canvas>
+        </div>
+
+<!-- Tabla de menús más vendidos -->
+<div th:if="${menusMasVendidos}" class="mas-vendidos">
+    <h3>🥇 Menús Más Vendidos</h3>
+    <table class="tabla-vendidos">
+        <thead>
+            <tr>
+                <th>Nombre del Menú</th>
+                <th>Cantidad Vendida</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="menu : ${menusMasVendidos}">
+                <td th:text="${menu.nombre}">Nombre</td>
+                <td th:text="${menu.cantidad}">0</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- NUEVO: Tabla de ventas -->
+<div th:if="${ventasDetalle}" class="ventas-detalle">
+    <h3>🧾 Ventas Realizadas</h3>
+    <table class="tabla-ventas">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Total (S/)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="venta : ${ventasDetalle}">
+                <td th:text="${venta.fecha}">01/01/2025</td>
+                <td th:text="${venta.total}">0.00</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+    <!-- Scripts para el gráfico -->
+    <div layout:fragment="page-scripts">
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            let ventasPorFecha = /*[[${ventasPorFecha}]]*/ [];
+            let fechas = ventasPorFecha.map(v => v.fecha);
+            let totales = ventasPorFecha.map(v => v.total);
+
+            const ctx = document.getElementById('ventasChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: fechas,
+                    datasets: [{
+                        label: 'Ventas Totales (S/)',
+                        data: totales,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            /*]]>*/
+        </script>
+    </div>
+</section>

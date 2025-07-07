@@ -1,0 +1,204 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f7f7;
+}
+.container-mesas {
+    margin: 40px 60px;
+}
+.container-mesas h2 {
+    margin-bottom: 20px;
+}
+.btn-add {
+    background: #1cc7a5;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    float: right;
+    margin-bottom: 20px;
+    transition: background 0.2s;
+}
+.btn-add:hover {
+    background: #17a589;
+}
+.mesas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+.mesa-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 25px 20px 20px 20px;
+    text-align: center;
+    position: relative;
+    min-width: 180px;
+}
+.mesa-card h3 {
+    margin: 0 0 8px 0;
+}
+.mesa-card p {
+    margin: 0 0 10px 0;
+    color: #444;
+}
+.estado {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 4px 0;
+    width: 100%;
+}
+.estado.disponible {
+    color: #1cc700;
+    background: #eaffea;
+    border: 1px solid #1cc700;
+}
+.estado.ocupado {
+    color: #e74c3c;
+    background: #ffeaea;
+    border: 1px solid #e74c3c;
+}
+.btn-estado {
+    background: #f1c40f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+.btn-estado:hover {
+    background: #d4ac0d;
+}
+.mesa-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.btn-editar {
+    background: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+.btn-editar:hover {
+    background: #217dbb;
+}
+.btn-eliminar {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+.btn-eliminar:hover {
+    background: #c0392b;
+}
+.form-container {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 30px 40px;
+    max-width: 400px;
+    margin: 40px auto;
+}
+.form-container h2 {
+    margin-bottom: 20px;
+}
+.form-container label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+.form-container input, .form-container select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+.btn-guardar {
+    background: #1cc7a5;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: background 0.2s;
+}
+.btn-guardar:hover {
+    background: #17a589;
+}
+.btn-cancelar {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.btn-cancelar:hover {
+    background: #c0392b;
+}
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #c3e6cb;
+}
+.btn-pedido {
+    background-color: #28a745;       /* Verde estilo "confirmar" */
+    color: white;
+    font-weight: bold;
+    padding: 9px 19px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-pedido:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.btn-pedido:active {
+    background-color: #1e7e34;
+    transform: scale(0.97);
+}
+
+@media (max-width: 900px) {
+    .mesas-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 600px) {
+    .mesas-grid {
+        grid-template-columns: 1fr;
+    }
+    .container-mesas {
+        margin: 20px 5px;
+    }
+    .form-container {
+        padding: 20px 10px;
+    }
+} 

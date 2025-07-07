@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link th:href="@{/css/empleados.css}" rel="stylesheet" />
 </head>
+
 <body>
     <div class="app-container">
         <button id="sidebarToggle" class="sidebar-toggle" title="Mostrar/ocultar menú">
@@ -25,6 +27,11 @@
                     <a th:href="@{/home}">Inicio</a>
                 </div>
                 <div class="nav-item">
+                    <i class="fas fa-cash-register"></i>
+                    <a th:href="@{/cobros}">Cobros</a>
+                </div>
+
+                <div class="nav-item">
                     <i class="fas fa-table"></i>
                     <a th:href="@{/mesas}">Gestión de Mesas</a>
                 </div>
@@ -32,6 +39,15 @@
                     <i class="fas fa-utensils"></i>
                     <a th:href="@{/menu}">Gestión de Menú</a>
                 </div>
+                <div class="nav-item">
+                    <i class="fas fa-receipt"></i>
+                    <a th:href="@{/pedidos}">Gestión de Pedidos</a>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-cash-register"></i>
+                    <a th:href="@{/ventas/nueva}">Registrar Venta</a>
+                </div>
+
                 <div class="nav-item">
                     <i class="fas fa-users"></i>
                     <a th:href="@{/empleados}">Gestión de Empleados</a>
@@ -43,7 +59,7 @@
                 <div class="nav-item">
                     <i class="fas fa-tags"></i>
                     <a th:href="@{/promociones}">Promociones</a>
-                </div>  
+                </div>
                 <div class="nav-item">
                     <i class="fas fa-chart-bar"></i>
                     <a th:href="@{/reportes}">Reportes</a>
@@ -67,12 +83,13 @@
             </div>
         </div>
         <!-- Contenido principal -->
-            <main class="main-content" id="mainContent" layout:fragment="content">
-                <!-- Aquí Thymeleaf inyectará el contenido de las vistas hijas -->
+        <main class="main-content" id="mainContent" layout:fragment="content">
+            <!-- Aquí Thymeleaf inyectará el contenido de las vistas hijas -->
         </main>
 
     </div>
     <script th:src="@{/js/sidebar.js}"></script>
     <div layout:fragment="page-scripts"></div>
 </body>
+
 </html>

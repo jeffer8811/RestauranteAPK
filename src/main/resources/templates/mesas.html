@@ -1,0 +1,91 @@
+<div layout:decorate="~{base}">
+    <div layout:fragment="content">
+        <div class="container-mesas">
+            <h2>Gestión de mesas</h2>
+
+            <div th:if="${mensaje}" class="alert-success" th:text="${mensaje}"></div>
+
+            <a href="/mesas/nueva" class="btn-add">+ Añadir mesas</a>
+
+            <div class="mesas-grid">
+                <div th:each="mesa : ${mesas}">
+                    <div class="mesa-card">
+                        <h3 th:text="|Mesa ${mesa.numero}|"></h3>
+                        <p th:text="|${mesa.capacidad} personas|"></p>
+
+                        <!-- Estado y botón Ocupar/Liberar -->
+                        <form th:action="@{'/mesas/estado/' + ${mesa.id}}" method="post">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                            <span class="estado"
+                                  th:classappend="${mesa.estado} == 'Disponible' ? 'disponible' : 'ocupado'"
+                                  th:text="${mesa.estado}"></span>
+                            <input type="hidden" name="estado"
+                                   th:value="${mesa.estado} == 'Disponible' ? 'Ocupado' : 'Disponible'">
+                            <button type="submit" class="btn-estado"
+                                    th:text="${mesa.estado} == 'Disponible' ? 'Ocupar' : 'Liberar'"></button>
+                        </form>
+
+                        <!-- Botón para abrir el modal -->
+                        <button class="btn-pedido"
+                                th:attr="onclick=|abrirFormularioPedido(${mesa.id}, ${mesa.numero})|">
+                            📝 Añadir Pedido
+                        </button>
+
+                        <!-- Acciones: Editar / Eliminar -->
+                        <div class="mesa-actions">
+                            <a th:href="@{'/mesas/editar/' + ${mesa.id}}" class="btn-editar">Editar</a>
+                            <a th:href="@{'/mesas/eliminar/' + ${mesa.id}}" class="btn-eliminar"
+                               onclick="return confirm('¿Seguro que deseas eliminar esta mesa?')">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <link rel="stylesheet" href="/css/mesas.css">
+    </div>
+</div>
+
+<!-- ✅ Modal del formulario de pedido -->
+<div id="modalPedido" class="modal" style="display:none;">
+    <div class="modal-content">
+        <h2>Registrar Pedido para Mesa <span id="modalMesaNumero">#</span></h2>
+
+        <form id="formPedido" method="post" action="/pedidos/guardarItem">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+            <input type="hidden" id="mesaId" name="mesaId" />
+
+            <div class="form-group">
+                <label>Producto del Menú:</label>
+                <select name="menuItemId" required>
+                    <option value="">-- Selecciona un producto --</option>
+                    <option th:each="item : ${menuItems}" 
+                            th:value="${item.id}" 
+                            th:text="|${item.nombre} - S/ ${item.precio}|">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Cantidad:</label>
+                <input type="number" name="cantidad" min="1" required>
+            </div>
+            <div class="form-actions">
+                <button type="button" onclick="cerrarFormularioPedido()" class="btn-cancelar">Cancelar</button>
+                <button type="submit" class="btn-guardar">Registrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function abrirFormularioPedido(idMesa, numeroMesa) {
+        document.getElementById("mesaId").value = idMesa;
+        document.getElementById("modalMesaNumero").innerText = numeroMesa;
+        document.getElementById("modalPedido").style.display = "flex";
+    }
+
+    function cerrarFormularioPedido() {
+        document.getElementById("modalPedido").style.display = "none";
+    }
+</script>
