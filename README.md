@@ -43,7 +43,7 @@ Geston de mesas
 
 ---
 
-### 📦 Gestión de Productos  
+### 📦Reportes y analisis
 Registrar, editar y eliminar productos del menú con control de stock.
 
 <img src="https://github.com/user-attachments/assets/34ef2c0c-40cf-42f9-bf2c-a7d04148b92b" width="100%" />
