@@ -1,18 +1,18 @@
 # 🍽️ RestauranteAPK
 
-**RestauranteAPK** es un sistema web de gestión para restaurantes desarrollado con **Spring Boot**. Permite controlar mesas, pedidos, ventas, productos e inventario, además de generar reportes gráficos para el administrador o dueño del negocio.
+**RestauranteAPK** es un sistema web de gestión para restaurantes desarrollado con **Spring Boot**. Permite controlar mesas, pedidos, ventas, productos e inventario, además de generar reportes visuales y estadísticas útiles para la administración del negocio.
 
 ---
 
 ## ✨ Funcionalidades principales
 
-- 🪑 Gestión de mesas y pedidos individuales
+- 🪑 Gestión de mesas y pedidos
 - 💵 Registro de ventas y cobro por mesa
 - 📦 Control de inventario de productos
-- 📊 Reportes de ventas, productos más vendidos y estadísticas generales
-- 📅 Filtros por rango de fechas para análisis detallado
+- 📊 Reportes de ventas, productos más vendidos y análisis financiero
+- 📅 Filtros por rangos de fechas para reportes detallados
 - 📄 Exportación de reportes en PDF
-- 🔐 Módulo administrativo con control de accesos por roles
+- 🔐 Módulo administrativo con roles y control de accesos
 
 ---
 
@@ -34,41 +34,44 @@
 ## 🖼️ Capturas de pantalla
 
 ### 🛠️ Panel de Administrador  
-Visualiza estadísticas generales, accesos rápidos y opciones de control.
-<img width="1917" height="940" alt="image" src="https://github.com/user-attachments/assets/83ed1e76-f47c-4b60-a937-960686651b57" />
+Visualiza estadísticas generales y accesos rápidos a todos los módulos del sistema.
+
+<img src="https://github.com/user-attachments/assets/83ed1e76-f47c-4b60-a937-960686651b57" width="100%" />
+
 ---
-Geston de mesas
+
+### 🍽️ Gestión de Mesas  
+Visualiza las mesas del restaurante y su estado (disponible, ocupada, en espera).
 
 <img src="https://github.com/user-attachments/assets/0c99e0e6-a473-4cc7-ab24-7186c20df879" width="100%" />
 
 ---
 
-### 📦Reportes y analisis
-Registrar, editar y eliminar productos del menú con control de stock.
-
-<img src="https://github.com/user-attachments/assets/34ef2c0c-40cf-42f9-bf2c-a7d04148b92b" width="100%" />
-
----
-
-
-### 📊 Gestion de inventario 
-Visualiza reportes por fechas, productos más vendidos y ventas totales.
-
-<img src="https://github.com/user-attachments/assets/62454476-a72d-4f61-8ed7-4dea3ba3ca3f" width="100%" />
-
----
-
-### 📈 Panel de Estadísticas  
-Gráficos dinámicos mensuales para análisis del rendimiento del restaurante.
+### 📈 Gestión de Menús  
+Control dinámico de platos disponibles, con opción para habilitar o deshabilitar productos.
 
 <img src="https://github.com/user-attachments/assets/041c4a59-d725-45c7-b309-1167e0ac72db" width="100%" />
 
 ---
 
-### 💰 Gestion de promociones 
-Permite al cajero realizar el cobro según lo consumido en cada mesa.
+### 📊 Gestión de Inventario  
+Visualiza el stock disponible, entrada y salida de productos, y alertas de escasez.
+
+<img src="https://github.com/user-attachments/assets/62454476-a72d-4f61-8ed7-4dea3ba3ca3f" width="100%" />
+
+---
+
+### 💰 Gestión de Promociones y Cobro  
+Permite realizar el cobro por mesa, aplicar promociones y generar tickets.
 
 <img src="https://github.com/user-attachments/assets/b0cd3255-85cd-49b0-bfaf-44eec4a7d2af" width="100%" />
+
+---
+
+### 📦 Reportes y Análisis  
+Genera reportes detallados por día, semana o mes, exportables en PDF.
+
+<img src="https://github.com/user-attachments/assets/34ef2c0c-40cf-42f9-bf2c-a7d04148b92b" width="100%" />
 
 ---
 
@@ -77,3 +80,4 @@ Permite al cajero realizar el cobro según lo consumido en cada mesa.
 1. 📥 Clona este repositorio:
    ```bash
    git clone https://github.com/jeffer8811/RestauranteAPK.git
+
