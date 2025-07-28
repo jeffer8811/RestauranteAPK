@@ -50,14 +50,8 @@ Registrar, editar y eliminar productos del menú con control de stock.
 
 ---
 
-### 💰 Cobro de Mesas  
-Permite al cajero realizar el cobro según lo consumido en cada mesa.
 
-<img src="https://github.com/user-attachments/assets/b0cd3255-85cd-49b0-bfaf-44eec4a7d2af" width="100%" />
-
----
-
-### 📊 Reportes con Gráficos  
+### 📊 Gestion de inventario 
 Visualiza reportes por fechas, productos más vendidos y ventas totales.
 
 <img src="https://github.com/user-attachments/assets/62454476-a72d-4f61-8ed7-4dea3ba3ca3f" width="100%" />
@@ -68,6 +62,13 @@ Visualiza reportes por fechas, productos más vendidos y ventas totales.
 Gráficos dinámicos mensuales para análisis del rendimiento del restaurante.
 
 <img src="https://github.com/user-attachments/assets/041c4a59-d725-45c7-b309-1167e0ac72db" width="100%" />
+
+---
+
+### 💰 Gestion de promociones 
+Permite al cajero realizar el cobro según lo consumido en cada mesa.
+
+<img src="https://github.com/user-attachments/assets/b0cd3255-85cd-49b0-bfaf-44eec4a7d2af" width="100%" />
 
 ---
 
