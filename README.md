@@ -34,6 +34,8 @@
 ## 🖥️ Capturas de pantalla (opcional)
 
 Puedes añadir aquí algunas imágenes de los módulos del sistema:
+<img width="1898" height="940" alt="image" src="https://github.com/user-attachments/assets/0c99e0e6-a473-4cc7-ab24-7186c20df879" />
+
 
 - Panel de administrador
 - Gestión de productos
