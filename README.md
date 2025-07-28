@@ -35,6 +35,9 @@
 
 ### 🛠️ Panel de Administrador  
 Visualiza estadísticas generales, accesos rápidos y opciones de control.
+<img width="1917" height="940" alt="image" src="https://github.com/user-attachments/assets/83ed1e76-f47c-4b60-a937-960686651b57" />
+---
+Geston de mesas
 
 <img src="https://github.com/user-attachments/assets/0c99e0e6-a473-4cc7-ab24-7186c20df879" width="100%" />
 
